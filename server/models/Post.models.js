@@ -5,6 +5,7 @@ const postSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
+      unique:true
     },
     author: {
       type: mongoose.Schema.Types.ObjectId,
@@ -23,7 +24,7 @@ const postSchema = new mongoose.Schema(
       ref: "Category",
     },
     published: {
-      type: Boolean,
+      type: String,
       enum: ["Darft", "Publish"],
       default: "Draft",
     },
@@ -37,9 +38,9 @@ const postSchema = new mongoose.Schema(
         ref: "Comment",
       },
     ],
-    like: [
+    likes: [
       {
-        type: mongoose.schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
       },
     ],

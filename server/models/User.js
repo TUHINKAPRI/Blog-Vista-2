@@ -19,16 +19,20 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    menbership: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Membership",
-      },
-    ],
-    bookmarks:{
-      type:mongoose.Schema.Types.ObjectId,
-      ref:"Bookmark"
-    }
+    membership: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "MembershipInfo",
+    },
+
+    bookmarks: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Bookmark",
+    },
+    role: {
+      type: String,
+      enum: ["Admin", "User"],
+      default: "User",
+    },
   },
   { timestamps: true }
 );
