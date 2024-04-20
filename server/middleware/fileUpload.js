@@ -7,15 +7,16 @@ const storage=multer.diskStorage({
     cb(null,path.join(__dirname,"../upload"))
   },
   filename:(req,file,cb)=>{
-  cb(null,`${Date.now()}${file.originalname} `)
+    console.log(file)
+  cb(null,`${Date.now()}${file.originalname}.png`)
   },
 })
 
 const upload=multer({
   storage:storage,
-  limits: {
-    fileSize: 1 * 1000000, // 1MB
-  },
+  // limits: {
+  //   fileSize: 1 * 1000000, // 1MB
+  // },
 })
 
 

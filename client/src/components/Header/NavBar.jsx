@@ -1,8 +1,12 @@
 import { navLink } from "@/constants/navlink";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import ProfieWithDropDown from "./ProfieWithDropDown";
 
 
 function NavBar() {
+  const { user } = useSelector((state) => state.profile);
+
   return (
     <div className=" flex justify-between items-center  max-w-80 sm:max-w-2xl md:max-w-6xl h-16 md:h-[100px] mx-auto">
       <div>
@@ -24,11 +28,18 @@ function NavBar() {
           ))}
         </div>
         <div>
-          <Link to="/sign-in">
+        {
+          user?(<>
+            <ProfieWithDropDown  user={user}   />
+          </>):(<>
+            <Link to="/sign-in">
             <div className="py-3 px-9 border-2 border-lightblue text-lightblue font-semibold rounded-full ">
               Sign-in
             </div>
           </Link>
+          </>)
+        }
+         
         </div>
       </div>
     </div>

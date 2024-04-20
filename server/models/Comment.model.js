@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 
 const commentSchema=new mongoose.Schema({
-  content:{
+content  :{
     type:String,
     required:true,
   },
@@ -17,6 +17,18 @@ const commentSchema=new mongoose.Schema({
   type:mongoose.Schema.Types.ObjectId,
   ref:"Post"
   },
+  parentComment:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"Comment",
+    default:null,
+  },
+  replies:[
+    {
+      type:mongoose.Schema.Types.ObjectId,
+      ref:"Comment",
+      
+    }
+  ]
 
 },{timestamps:true});
 

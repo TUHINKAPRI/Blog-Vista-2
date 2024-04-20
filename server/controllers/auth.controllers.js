@@ -9,11 +9,13 @@ exports.send_otp = async (req, res, next) => {
   try {
     const { email } = req.body;
     if (!email) {
-      throw new Error("both fields are required");
+     return  next(new Error("both fields are required"));
     }
     const ifExist = await User.findOne({ email: email });
     if (ifExist) {
-      throw new Error("User already exists");
+
+
+     return next(new Error("User already exists"))  ;
     }
     const otp = otpGenerator.generate(6, {
       upperCaseAlphabets: false,
@@ -55,6 +57,7 @@ exports.singup = async (req, res, next) => {
       throw new Error("Password does not match");
     }
     const findOtp = await OTP.findOne({ email: email }).sort({ createdAt: -1 });
+    console.log(findOtp)
     if (!findOtp) {
       throw new Error("OTP not found");
     }
