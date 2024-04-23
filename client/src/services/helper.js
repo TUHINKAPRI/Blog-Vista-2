@@ -21,3 +21,8 @@ axiosInstance.interceptors.request.use(
     return Promise.reject(err);
   }
 );
+
+
+axiosInstance.interceptors.response.use((data)=>{return data},(error)=>{
+ return Promise.reject(error.response);
+})

@@ -14,10 +14,11 @@ const {
   editComment,
   getAllCommentsForAPost,
 } = require("../controllers/comments.controllers");
+const upload = require("../middleware/fileUpload");
 
 const postRouter = express.Router();
 
-postRouter.post("/", authGuard, createPost);
+postRouter.post("/", authGuard,upload.single('thumbnail'), createPost);
 postRouter.get("/", getAllPost);
 postRouter.get("/:id", singlePost);
 postRouter.put("/:id", authGuard, updatePost);

@@ -1,5 +1,6 @@
 const upload = require("../middleware/fileUpload");
 const Post = require("../models/Post.models");
+const { uploadImage } = require("../utils/uploadToCloudinary");
 
 
 
@@ -7,7 +8,7 @@ const Post = require("../models/Post.models");
 exports.getAllPost = async (req, res, next) => {
   try {
     const filter = {};
-    const posts = await Post.find(filter);
+    const posts = await Post.find(filter).populate();
 
     res.status(200).json({
       success: true,
@@ -37,16 +38,12 @@ exports.singlePost=async(req,res,next)=>{
 
 exports.createPost = async (req, res, next) => {
   try {
-    const { title, content, tags, category, thumbnail, paid } = req.body;
-    console.log(req.body);
-    console.log(req.user._id);
-    console.log(req.files);
-    if (!title || !content || !tags || !category || !paid) {
+    const { title, content, tags, category,description, paid } = req.body;
+    if (!title || !content || !tags || !category || !req.file || !description ) {
       const error = new Error("Both fields are required");
       return next(error);
     }
-
-    const uploadThumbnail = upload.single("thumbnail");
+    const response=await uploadImage(req.file.path)
 
     const post = await Post.create({
       title: title,
@@ -54,13 +51,14 @@ exports.createPost = async (req, res, next) => {
       content,
       tags: JSON.parse(tags),
       category: category,
-      thumbnail: req?.files?.filename,
+      thumbnail:response.secure_url,
       paid,
+      description
     });
     res.status(200).json({
       success: true,
       message: "post created successfully",
-      data: post,
+      data:post,
     });
   } catch (err) {
     next(err);

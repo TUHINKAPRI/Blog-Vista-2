@@ -12,6 +12,8 @@ import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import MyProfile from "./components/dashboard/MyProfile";
 import Settings from "./components/dashboard/settings/Settings";
+import CreateBlog from "./components/dashboard/blog/CreateBlog";
+import EditBlog from "./components/dashboard/blog/EditBlog";
 
 function App() {
   return (
@@ -57,6 +59,8 @@ function App() {
           >
             <Route path="/dashboard/my-profile" element={<MyProfile />} />
             <Route path='/dashboard/settings' element={<Settings />} />
+            <Route path='/dashboard/create-blog' element={<CreateBlog/>} />
+            <Route path='/dashboard/edit-blog' element={<EditBlog/>} />
           </Route>
         </Routes>
       </Suspense>

@@ -7,7 +7,7 @@ const categoryRouter=express.Router();
 
 
 categoryRouter.post('/',authGuard, isAdmin ,createCategory)
-categoryRouter.get('/',authGuard, isAdmin,getAllCategory)
+categoryRouter.get('/',getAllCategory)
 categoryRouter.put('/:id',authGuard, isAdmin,updateCategory)
 categoryRouter.delete('/:id',authGuard, isAdmin,deleteCategory)
 

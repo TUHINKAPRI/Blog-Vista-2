@@ -12,3 +12,8 @@ export const UPDATE_PROFILE_PIC=BASE_URL+'/user/update-profile-picture'
 
 export const GET_ALL_POST=BASE_URL+'/post'
 export const CREATE_POST=BASE_URL+'/post'
+
+
+//category endpoints
+
+export const GET_CATEGORY=BASE_URL+'/category'

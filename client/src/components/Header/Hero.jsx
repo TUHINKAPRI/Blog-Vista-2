@@ -23,14 +23,14 @@ function Hero() {
 
           <div className="flex gap-[12px] flex-wrap  ">
             {tags?.map((ele, index) => (
-              <div
+              <button
                 className="bg-lightblue bg-opacity-10   rounded-[4px] "
                 key={index}
               >
                 <p className="py-[6px] px-[19px] italic font-bold  text-[14px] text-[#1565D8] ">
                   {ele}
                 </p>
-              </div>
+              </button>
             ))}
           </div>
         </div>

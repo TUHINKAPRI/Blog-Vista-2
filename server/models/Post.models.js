@@ -5,7 +5,11 @@ const postSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
-      unique:true
+      unique: true,
+    },
+    description: {
+      type: String,
+      required: true,
     },
     author: {
       type: mongoose.Schema.Types.ObjectId,
@@ -25,7 +29,7 @@ const postSchema = new mongoose.Schema(
     },
     published: {
       type: String,
-      enum: ["Darft", "Publish"],
+      enum: ["Draft", "Publish"],
       default: "Draft",
     },
     thumbnail: {
