@@ -17,3 +17,9 @@ export const CREATE_POST=BASE_URL+'/post'
 //category endpoints
 
 export const GET_CATEGORY=BASE_URL+'/category'
+
+// comments endpoints
+
+export const CREATE_COMMENT=BASE_URL+'/post'
+export const UPDATE_COMMENT=BASE_URL
+export const DELETE_COMMENT='/post'

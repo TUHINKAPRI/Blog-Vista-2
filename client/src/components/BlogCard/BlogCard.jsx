@@ -1,67 +1,68 @@
-function BlogCard() {
+import React from "react";
+import moment from "moment";
+import { Button } from "../ui/button";
+import { Link } from "react-router-dom";
+function BlogCard({ data }) {
   return (
-    <div>
-      <div className="absolute top-[699px] left-[593px] rounded-xl bg-white shadow-[0px_15px_25px_rgba(0,_0,_0,_0.06)] w-[360px] overflow-hidden flex flex-col items-start justify-start pt-0 px-0 pb-8 box-border gap-[24.7px] z-[5] text-left text-9xl text-darkslategray font-roboto">
-        <div className="self-stretch h-[498px] relative rounded-xl bg-white shadow-[0px_15px_25px_rgba(0,_0,_0,_0.06)] hidden" />
+   
+    <Link to={`/blog/${data?._id}`} className=" w-[310px] sm:w-[310px]  md:w-[360px]  !bg-white shadow-xl  rounded-lg">
+      <div>
         <img
-          className="self-stretch h-[255.3px] relative rounded-t-xl rounded-b-none max-w-full overflow-hidden shrink-0 object-cover z-[6]"
-          loading="lazy"
-          alt=""
-          src="/alesnesetrilim7lzjxelhgunsplash-1@2x.png"
+          src={data?.thumbnail}
+          alt="Img"
+          className="w-full h-[255px] rounded-t-md "
         />
-        <div className="self-stretch flex flex-row items-start justify-start py-0 px-8 text-left text-9xl text-darkslategray font-roboto">
-          <div className="flex-1 flex flex-col items-start justify-start gap-[32px]">
-            <div className="self-stretch flex flex-col items-start justify-start gap-[12px]">
-              <h2 className="m-0 self-stretch relative text-inherit tracking-[0.2px] leading-[36px] font-bold font-inherit z-[6] mq450:text-3xl mq450:leading-[29px]">
-                wegrwg
-              </h2>
-              <div className="self-stretch relative text-lg leading-[32px] font-open-sans z-[6]">
-                ergerg
-              </div>
+      </div>
+      <div className="w-[296px] mx-auto mt-[24px] mb-8 ">
+        <h1
+          className=" 
+ font-bold
+ text-[24px]
+ tracking-[0.2px]
+ leading-[1.286]
+ text-[#183B56]"
+        >
+          {data?.title?.slice(0, 50)}
+        </h1>
+        <p className="mt-[12px] text-[#5A7184] text-[14px] ">{data?.description?.slice(0, 70)} ... </p>
+        <div className="mt-[29px] flex justify-between ">
+          <div className="flex gap-3">
+            <img
+              src={data?.author?.profile_picture}
+              alt=""
+              className=" rounded-[999px]
+ bg-[50%_50%]
+ bg-cover
+ bg-no-repeat
+ w-[40px]
+ h-[40px]"
+            />
+            <div>
+              <p className=" italic font-bold text-[16px] md:text-[18px] text-darkblue">
+                {data?.author?.name}
+              </p>
+              <p className="font-['Open_Sans'] italic font-normal text-[14px] text[#5A7184]">
+                Normal
+              </p>
             </div>
-            <div className="self-stretch flex flex-row items-start justify-between gap-[20px] text-base font-open-sans mq450:flex-wrap">
-              <div className="flex flex-row items-start justify-start gap-[12px]">
-                <div className="flex flex-col items-start justify-start pt-0.5 px-0 pb-0">
-                  <div className="w-10 h-10 relative">
-                    <div className="absolute top-[0px] left-[0px] rounded-[50%] bg-tomato w-full h-full z-[6]" />
-                    <img
-                      className="absolute top-[0px] left-[0px] rounded-980xl w-full h-full object-cover z-[7]"
-                      loading="lazy"
-                      alt="img"
-                      src=""
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-col items-start justify-start gap-[4px]">
-                  <i className="relative inline-block font-bold min-w-[122px] z-[6]">
-                    erger
-                  </i>
-                  <div className="flex flex-row items-start justify-start gap-[8px] text-sm text-slategray-100">
-                    <div className="flex flex-col items-start justify-start pt-0.5 px-0 pb-0">
-                      <img
-                        className="w-4 h-4 relative z-[6]"
-                        loading="lazy"
-                        alt="img"
-                        src=""
-                      />
-                    </div>
-                    <i className="relative inline-block min-w-[87px] z-[6]">
-                      Verified writer
-                    </i>
-                  </div>
-                </div>
-              </div>
-              <div className="w-[54px] flex flex-col items-start justify-start pt-3 px-0 pb-0 box-border text-right text-slategray-100">
-                <i className="self-stretch relative inline-block font-bold min-w-[54px] z-[6]">
-                  02 May
-                </i>
-              </div>
-            </div>
+          </div>
+          <div>
+            <p className="text-gray font-semibold italic">
+              {moment(data?.createdAt).format("MMMM Do")}
+            </p>
           </div>
         </div>
       </div>
-    </div>
+     
+    </Link>
+    
+
   );
 }
 
 export default BlogCard;
+
+
+
+
+

@@ -53,7 +53,6 @@ function BlogForm() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
     setValue,
   } = useForm();

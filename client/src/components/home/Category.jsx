@@ -1,19 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
 
-import SmallLoading from "../Loading/SmallLoading";
-import { getAllCategory } from "@/services/operations/ctegoryOperation";
 
-function Category() {
-  const { data, isLoading } = useQuery({
-    queryKey: ["GET_ALL_CATEGORY"],
-    queryFn: getAllCategory,
-  });
-  console.log(data);
-  if (isLoading) {
-    return <SmallLoading />;
-  }
+function Category({data}) {
+
   return (
-    <div className="flex "  >
+    <div className=" hidden sm:flex "  >
       <h2 className="italic  font-bold text-[#5A7184]  me-4 "  >All Category : </h2>
       <div className="flex gap-3" >
       {data?.data?.map((ele, index) => (

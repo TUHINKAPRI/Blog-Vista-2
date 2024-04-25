@@ -17,7 +17,7 @@ import EditBlog from "./components/dashboard/blog/EditBlog";
 
 function App() {
   return (
-    <div className="bg-[#F9FCFF]   h-screen ">
+    <div className="bg-[#F9FCFF]   ">
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<Home />} />
