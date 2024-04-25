@@ -4,9 +4,11 @@ import Loading from "../Loading/Loading";
 import BlogCard from "../BlogCard/BlogCard";
 import { Button } from "../ui/button";
 import { FaArrowRight } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 function FewPostData() {
+  const navigate=useNavigate()
   const { data, isLoading } = useQuery({
-    queryKey: ["FEtch_all-post"],
+    queryKey: ["Fetch_all-post"],
     queryFn: get_all_blogs,
   });
 
@@ -26,6 +28,7 @@ function FewPostData() {
         <Button
           variant="outline"
           className="border-lightblue text-lightblue "
+          onClick={()=>{navigate('/blogs')}}
         >
 
           More Articals  <span className="ms-4" > <FaArrowRight/> </span>

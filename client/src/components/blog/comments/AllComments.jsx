@@ -10,6 +10,7 @@ import {
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import Loading from "@/components/Loading/Loading";
+import { Link } from "react-router-dom";
 
 function AllComments({ comments, postId }) {
   const { user } = useSelector((state) => state.profile);
@@ -72,12 +73,25 @@ function AllComments({ comments, postId }) {
 
   return (
     <div>
-      <div className="mt-[70px]">
-        <CommentForm
-        
-          formSubmitHnadler={addCommentHandler}
-          pending={pendingAddComment}
-        />
+      <div >
+        {user ? (
+          <>
+            <div className="mt-[70px]" >
+            <CommentForm
+              formSubmitHnadler={addCommentHandler}
+              pending={pendingAddComment}
+            />
+            </div>
+          </>
+        ) : (
+          <>
+            <h1 className="font-semibold text-lg">Need To Login For Create comemnt
+            <Link className="ms-2 text-lightblue " to='/sign-in'>
+              sign-in
+            </Link>
+            </h1>
+          </>
+        )}
       </div>
       <h1 className="font-semibold text-[20px] mt-3 ">
         All comments

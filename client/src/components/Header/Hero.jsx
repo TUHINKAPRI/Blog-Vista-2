@@ -1,7 +1,24 @@
+import { useNavigate } from "react-router-dom";
 import SearchBox from "../Search/Search";
+import { useQuery } from "@tanstack/react-query";
+import { getAllCategory } from "@/services/operations/ctegoryOperation";
 
 function Hero() {
-  const tags = ["Coding", "Bussiness", "soft Skills"];
+const navigate=useNavigate()
+  const serchSubmitHandler = (data) => {
+    navigate(`/blogs?search=${data}`);
+  };
+  const categoryHandler=(category)=>{
+    navigate(`/blogs?category=${category}`);
+  }
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["GET_ALL_CATEGORY"],
+    queryFn: getAllCategory,
+  });
+
+  console.log(data)
+
   return (
     <div className=" grid grid-cols-1   md:grid-cols-2 gap-[31px] ">
       <div className="col-span-1 w-full sm:w-[535px] md:w-full items-center md:items-start   flex flex-col mx-auto  text-darkblue ">
@@ -13,7 +30,7 @@ function Hero() {
           eiusmod tempor incididunt ut labore et dolore magna aliqua
         </p>
         <div>
-          <SearchBox />
+          <SearchBox  serchSubmitHandler={serchSubmitHandler} />
         </div>
         <div className="flex sm:flex-row flex-col mt-4 gap-2  sm:items-center">
           <p className="italic  font-bold text-[#5A7184]  me-4 ">
@@ -22,13 +39,14 @@ function Hero() {
           </p>
 
           <div className="flex gap-[12px] flex-wrap  ">
-            {tags?.map((ele, index) => (
+            {data?.data?.slice(0,3).reverse().map((ele, index) => (
               <button
                 className="bg-lightblue bg-opacity-10   rounded-[4px] "
                 key={index}
+              onClick={()=>(categoryHandler(ele?._id))}
               >
                 <p className="py-[6px] px-[19px] italic font-bold  text-[14px] text-[#1565D8] ">
-                  {ele}
+                  {ele?.name}
                 </p>
               </button>
             ))}

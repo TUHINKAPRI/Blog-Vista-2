@@ -20,7 +20,7 @@ function Home() {
   return (
     <MainLayout>
       <Hero />
-      <Category data={data} />
+      <Category category={data} />
       <FewPostData/>
     </MainLayout>
   );
