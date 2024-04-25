@@ -2,13 +2,30 @@ const upload = require("../middleware/fileUpload");
 const Post = require("../models/Post.models");
 const { uploadImage } = require("../utils/uploadToCloudinary");
 
-
-
-
 exports.getAllPost = async (req, res, next) => {
   try {
     const filter = {};
-    const posts = await Post.find(filter).populate();
+    if(req.query.category){
+      filter.category=req.query.category;
+    }
+    const posts = await Post.find({
+      ...filter,
+      ...(req.query.search && {
+        $or: [
+          { title: { $regex: req.query.search, $options: "xi" } },
+          { tags: { $regex: req.query.search, $options: "xi" } },
+        ],
+      }),
+    }).populate([
+      {
+        path: "author",
+        select: ["profile_picture", "name"],
+      },
+      {
+        path: "category",
+        select: ["name"],
+      },
+    ]);
 
     res.status(200).json({
       success: true,
@@ -20,30 +37,44 @@ exports.getAllPost = async (req, res, next) => {
   }
 };
 
-exports.singlePost=async(req,res,next)=>{
-  try{
-    const {id}=req.params;
-    const post=await Post.findOne({_id:id});
+exports.singlePost = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const post = await Post.findOne({ _id: id }).populate([
+      {
+        path: "category",
+        select: ["name"],
+      },
+      {
+        path: "author",
+        select: ["name", "profile_picture"],
+      },
+      {
+        path: "comments",
+        populate: {
+          path: "user",
+        },
+      },
+    ]);
 
     res.status(200).json({
-      success:true,
-      message:"Post fetch successfully",
-      data:post
-    })
-
-  }catch(err){
+      success: true,
+      message: "Post fetch successfully",
+      data: post,
+    });
+  } catch (err) {
     next(err);
   }
-}
+};
 
 exports.createPost = async (req, res, next) => {
   try {
-    const { title, content, tags, category,description, paid } = req.body;
-    if (!title || !content || !tags || !category || !req.file || !description ) {
+    const { title, content, tags, category, description, paid } = req.body;
+    if (!title || !content || !tags || !category || !req.file || !description) {
       const error = new Error("Both fields are required");
       return next(error);
     }
-    const response=await uploadImage(req.file.path)
+    const response = await uploadImage(req.file.path);
 
     const post = await Post.create({
       title: title,
@@ -51,14 +82,14 @@ exports.createPost = async (req, res, next) => {
       content,
       tags: JSON.parse(tags),
       category: category,
-      thumbnail:response.secure_url,
+      thumbnail: response.secure_url,
       paid,
-      description
+      description,
     });
     res.status(200).json({
       success: true,
       message: "post created successfully",
-      data:post,
+      data: post,
     });
   } catch (err) {
     next(err);

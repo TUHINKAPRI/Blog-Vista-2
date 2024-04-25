@@ -5,7 +5,7 @@ exports.createComment = async (req, res, next) => {
   try {
     const { content, parentCommentId } = req.body;
     const { postId } = req.params;
-    const userId = req.urse._id;
+    const userId = req.user?._id;
 
     if (!content) {
       return next(new Error("Comment is required"));
@@ -29,6 +29,10 @@ exports.createComment = async (req, res, next) => {
     if (parentComments) {
       parentComments.replies.push(comment._id);
       await parentComments.save();
+    }
+    if(!parentComments) {
+      isExist.comments.push(comment._id);
+      await isExist.save()
     }
 
     res.status(200).json({
@@ -88,7 +92,9 @@ exports.editComment = async (req, res, next) => {
       return next(new Error("Comment not found"));
     }
 
-    if (isExistComment.user !== userId) {
+
+
+    if (isExistComment.user.toString() !== userId) {
       return next(new Error("You cannot edit  this comment"));
     }
 
@@ -98,7 +104,7 @@ exports.editComment = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Comment created successfully",
+      message: "Comment edited successfully",
     });
   } catch (err) {
     next(err);
