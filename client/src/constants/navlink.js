@@ -8,11 +8,8 @@ export const navLink=[
     name:"Blogs",
     path:'/blogs'
   },{
-    name:"About",
-    path:"/about",
+    name:"Membership",
+    path:"/membership",
 
-  },{
-    name:"Contact",
-    path:'/contact'
   }
 ]

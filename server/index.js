@@ -3,12 +3,11 @@ const { db_connction } = require("./config/db_connection");
 const { errorHandler } = require("./middleware/errorHandler");
 const authRouter = require("./routes/auth.routes");
 const postRouter = require("./routes/post.routes");
-const upload = require("./middleware/fileUpload");
-const path = require("path");
 const categoryRouter = require("./routes/category.routes");
 const bookMarkRouter = require("./routes/bookmark.routes");
 const cors = require("cors");
 const userRouter = require("./routes/user.routes");
+const memRouter=require('./routes/membership.routes')
 const { cloudinary_connection } = require("./config/cloudinary_connection");
 require("dotenv").config();
 
@@ -26,6 +25,7 @@ app.use("/api/v1/post", postRouter);
 app.use("/api/v1/category", categoryRouter);
 app.use("/api/v1/bookMark", bookMarkRouter);
 app.use("/api/v1/user", userRouter);
+app.use('/api/v1/membership',memRouter)
 
 
 app.use(errorHandler);

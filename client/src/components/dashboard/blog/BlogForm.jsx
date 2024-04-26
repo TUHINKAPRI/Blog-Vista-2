@@ -8,26 +8,18 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { MdOutlinePhotoSizeSelectActual } from "react-icons/md";
-
 import { getAllCategory } from "@/services/operations/ctegoryOperation";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import CahipInput from "./CahipInput";
-
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
+
 import { Button } from "@/components/ui/button";
 import SmallLoading from "@/components/Loading/SmallLoading";
-import { create_blog } from "@/services/operations/blogOperation";
-import { useDispatch } from "react-redux";
-import { logout } from "@/redux/slices/profileSlice";
-import { useNavigate } from "react-router-dom";
-import { setBlogs } from "@/redux/slices/blogSlice";
-function BlogForm() {
-  const dispatch = useDispatch();
-  const navigate=useNavigate()
+
+function BlogForm({ submitPostHandler, isLoading, formValue }) {
   const [category, setCategory] = useState();
   const [value, setValues] = useState("");
   const [img, setImg] = useState(null);
@@ -35,61 +27,42 @@ function BlogForm() {
     queryKey: ["GET_ALL_CATEGORY"],
     queryFn: getAllCategory,
   });
-  const { mutate, isPending } = useMutation({
-    mutationFn: create_blog,
-    onSuccess: (res) => {
-      toast.success(res?.message)
-      dispatch(setBlogs(res.data))
-    },
-    onError: (error) => {
-      if (error?.data?.status === 403) {
-        toast.error(error?.data?.message)
-      dispatch(logout());
-      return navigate('/')
-      }
-      toast.error(error?.data?.message)
-    },
-  });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm();
-console.log(errors)
-  const craeteBlogHandler = (data) => {
-    if (!img) {
-      return toast.error("Image is required");
-    }
-
-    console.log(data)
-  
-   const fd=new FormData();
-
-   fd.append('title',data.title);
-   fd.append('description',data.description);
-   fd.append('thumbnail',img);
-   fd.append('content',data.content);
-   fd.append('category',data.category);
-   fd.append('tags',JSON.stringify(data.tags));
-   fd.append('paid',data.paid);
-   mutate(fd)
-  };
-
+    getValues,
+  } = useForm({
+    defaultValues: {
+      title: formValue ? formValue?.title : "",
+      description: formValue ? formValue?.description : "",
+      paid: formValue ? formValue?.paid : false,
+      thumbnail: formValue ? formValue?.thumbnail : "",
+    },
+  });
   useEffect(() => {
     setValue("content", value);
     setValue("category", category);
-  }, [value, category, setValue]);
+    setValue("thumbnail", img);
+  }, [value, category, setValue, img]);
 
   useEffect(() => {
     register("category", { required: true });
     register("tags", { required: true });
     register("content", { required: true });
+    register("thumbnail");
+  }, []);
+
+  useEffect(() => {
+    setCategory(formValue?.category?._id);
+    setValues(formValue?.content);
   }, []);
   return (
     <div>
       <form
-        onSubmit={handleSubmit(craeteBlogHandler)}
+        onSubmit={handleSubmit(submitPostHandler)}
         className="w-full max-w-lg mx-auto mt-6  "
       >
         <div className="flex flex-wrap -mx-3 mb-6">
@@ -121,8 +94,8 @@ console.log(errors)
               Category
             </label>
             <Select
+              className="text-gray"
               onValueChange={(data) => {
-                console.log(data);
                 setCategory(data);
               }}
             >
@@ -141,6 +114,11 @@ console.log(errors)
                 </SelectGroup>
               </SelectContent>
             </Select>
+            {errors.category && (
+              <p className="text-red-500 text-xs italic">
+                Please fill out this field.
+              </p>
+            )}
           </div>
         </div>
         <div className="flex flex-wrap -mx-3 mb-">
@@ -151,7 +129,11 @@ console.log(errors)
             >
               Tags
             </label>
-            <CahipInput setValue={setValue} />
+            <CahipInput
+              setValue={setValue}
+              inputValue={formValue?.tags}
+              getValues={getValues}
+            />
             {/* <p className="text-gray-600 text-xs italic">
               Make it as long and as crazy as you'd like
             </p> */}
@@ -208,10 +190,22 @@ console.log(errors)
                   </>
                 ) : (
                   <>
-                    <MdOutlinePhotoSizeSelectActual
-                      className="mx-auto h-12 w-12 text-gray-300"
-                      aria-hidden="true"
-                    />
+                    {formValue?.thumbnail ? (
+                      <>
+                        <img
+                          src={formValue.thumbnail}
+                          alt="wef"
+                          className="w-72 h-60"
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <MdOutlinePhotoSizeSelectActual
+                          className="mx-auto h-12 w-12 text-gray-300"
+                          aria-hidden="true"
+                        />
+                      </>
+                    )}
                   </>
                 )}
 
@@ -220,7 +214,7 @@ console.log(errors)
                     htmlFor="file-upload"
                     className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                   >
-                    <div className="text-lightblue">CHOSE FILE</div>
+                    <div className="text-lightblue">CHOCSE FILE</div>
                     <input
                       id="file-upload"
                       name="file-upload"
@@ -260,11 +254,11 @@ console.log(errors)
         <div>
           <Button
             type="submit"
-            disabled={isPending?true:false}
+            disabled={isLoading ? true : false}
             variant="outline"
             className="w-full my-10 border-lightblue text-lightblue font-semibold hover:bg-lightblue hover:text-white "
           >
-            {isPending ? (
+            {isLoading ? (
               <>
                 <SmallLoading />
               </>

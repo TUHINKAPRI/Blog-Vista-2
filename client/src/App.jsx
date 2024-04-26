@@ -15,6 +15,10 @@ import Settings from "./components/dashboard/settings/Settings";
 import CreateBlog from "./components/dashboard/blog/CreateBlog";
 import EditBlog from "./components/dashboard/blog/EditBlog";
 
+import Membership from "./pages/Membership";
+import MyBlogs from "./components/dashboard/MyBlogs";
+
+
 function App() {
   return (
     <div className="bg-[#F9FCFF]   ">
@@ -23,6 +27,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/blogs" element={<Blog />} />
           <Route path="/blog/:id" element={<SingleBlog />} />
+          <Route path='/membership' element={<Membership/>} />
           <Route
             path="/sign-up"
             element={
@@ -58,9 +63,10 @@ function App() {
             }
           >
             <Route path="/dashboard/my-profile" element={<MyProfile />} />
+            <Route path='/dashboard/my-blog' element={<MyBlogs />} /> 
             <Route path='/dashboard/settings' element={<Settings />} />
             <Route path='/dashboard/create-blog' element={<CreateBlog/>} />
-            <Route path='/dashboard/edit-blog' element={<EditBlog/>} />
+            <Route path='/dashboard/edit-blog/:id' element={<EditBlog/>} />
           </Route>
         </Routes>
       </Suspense>

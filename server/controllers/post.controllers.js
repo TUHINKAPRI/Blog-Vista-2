@@ -1,12 +1,13 @@
 const upload = require("../middleware/fileUpload");
 const Post = require("../models/Post.models");
+const User = require("../models/User");
 const { uploadImage } = require("../utils/uploadToCloudinary");
 
 exports.getAllPost = async (req, res, next) => {
   try {
     const filter = {};
-    if(req.query.category){
-      filter.category=req.query.category;
+    if (req.query.category) {
+      filter.category = req.query.category;
     }
     const posts = await Post.find({
       ...filter,
@@ -40,6 +41,7 @@ exports.getAllPost = async (req, res, next) => {
 exports.singlePost = async (req, res, next) => {
   try {
     const { id } = req.params;
+
     const post = await Post.findOne({ _id: id }).populate([
       {
         path: "category",
@@ -56,10 +58,34 @@ exports.singlePost = async (req, res, next) => {
         },
       },
     ]);
+    // console.log(req.user)
+    //     if(!post?.paid){
+    //     return   res.status(200).json({
+    //         success: true,
+    //         message: "Post fetch successfully",
+    //         data: post,
+    //       });
+    //     }
+
+    //     if(!req?.user?._id){
+    //      return  res.status(200).json({
+    //         success: true,
+    //         message:"Need to login or purchese our memberships"
+    //       })
+    //     }
+
+    //     const findUser=await User.findOne({_id:req.user._id})
+
+    //       if(!findUser?.membership){
+    //         return res.status(200).json({
+    //           success: true,
+    //           message:"Need to purchese our memberships"
+    //         })
+    //       }
 
     res.status(200).json({
       success: true,
-      message: "Post fetch successfully",
+      message: "successfully fetch blog details",
       data: post,
     });
   } catch (err) {
@@ -99,15 +125,22 @@ exports.createPost = async (req, res, next) => {
 exports.updatePost = async (req, res, next) => {
   try {
     const { id } = req.params;
-    if (req.files) {
-      upload.single("thumbnail");
+    let response;
+    if (req.file) {
+      response = await uploadImage(req.file.path);
     }
+
     const updatedPost = await Post.findByIdAndUpdate(
       { _id: id },
       {
         $set: {
-          ...req.body,
-          ...(req.files && { thumbnail: req.files.filename }),
+          title: req.body.title,
+          description: req.body.description,
+          tags: JSON.parse(req.body.tags),
+          content: req.body.content,
+          category: req.body.category,
+
+          ...(req.file && { thumbnail: response.secure_url }),
         },
       },
       { new: true }

@@ -1,3 +1,4 @@
+const Post = require("../models/Post.models");
 const User = require("../models/User");
 const { uploadImage } = require("../utils/uploadToCloudinary");
 
@@ -22,3 +23,20 @@ exports.updateProfilePicture = async (req, res, next) => {
     });
   } catch (err) {}
 };
+
+
+exports.getUserPosts=async(req,res,next)=>{
+  try{
+    const userId=req.user._id;
+    const userPost=await Post.find({author:userId});
+    return res.status(200).json({
+      success: true,
+      message: "user post successfully",
+      data:userPost
+    })
+
+  }catch(err){
+    console.log(err);
+    next(err);
+  }
+}

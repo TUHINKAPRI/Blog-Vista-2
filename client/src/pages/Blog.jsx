@@ -5,18 +5,16 @@ import Category from "@/components/home/Category";
 import { get_all_blogs } from "@/services/operations/blogOperation";
 import { getAllCategory } from "@/services/operations/ctegoryOperation";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import queryString from "query-string";
 import BlogComponent from "@/components/blog/BlogComponent";
 function Blog() {
   const navigate = useNavigate();
-  const [searchData, setSearchData] = useState(window.location.search);
   const queryParams = queryString.parse(window.location.search);
   const query = queryParams;
-  useEffect(() => {
-    setSearchData(window.location.search);
-  }, [window.location.search]);
+  // useEffect(() => {
+  //   setSearchData(window.location.search);
+  // }, [window.location.search]);
 
   const { data, isLoading } = useQuery({
     queryKey: ["GET_ALL_CATEGORY"],
@@ -29,7 +27,7 @@ function Blog() {
   });
 
   const { data: seacrhPost, isLoading: searchpostLoading } = useQuery({
-    queryKey: ["Fetch_all-post", searchData],
+    queryKey: ["Fetch_all-post", window.location.search],
     queryFn: get_all_blogs,
 
     enabled: Object.keys(query).length > 0,
@@ -47,9 +45,9 @@ function Blog() {
     return <Loading />;
   }
 
-  useEffect(() => {
-    window.scroll(0, 0);
-  }, []);
+  // useEffect(() => {
+  //   window.scroll(0, 0);
+  // }, []);
 
   return (
     <MainLayout>

@@ -2,7 +2,8 @@ import { Badge } from "@/components/ui/badge";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { X } from "lucide-react";
-function CahipInput({setValue}) {
+function CahipInput({setValue,inputValue}) {
+  
   const [chip, setChip] = useState([]);
   const chipControllers = (e) => {
     if (e.key === "Enter") {
@@ -27,6 +28,12 @@ function CahipInput({setValue}) {
 
     setChip([...chips]);
   };
+useEffect(()=>{
+if(inputValue){
+  setChip(inputValue);
+}
+},[])
+
 
   useEffect(()=>{
     setValue('tags',chip)

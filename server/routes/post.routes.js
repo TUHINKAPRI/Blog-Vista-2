@@ -21,7 +21,7 @@ const postRouter = express.Router();
 postRouter.post("/", authGuard,upload.single('thumbnail'), createPost);
 postRouter.get("/", getAllPost);
 postRouter.get("/:id", singlePost);
-postRouter.put("/:id", authGuard, updatePost);
+postRouter.put("/:id", authGuard,upload.single('thumbnail'), updatePost);
 postRouter.delete("/:id", authGuard, deletePost);
 postRouter.post("/like", authGuard, likeAPost);
 postRouter.post("/dislike", authGuard, dislikeAPost);
