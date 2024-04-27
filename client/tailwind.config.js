@@ -1,44 +1,64 @@
+// /** @type {import('tailwindcss').Config} */
+const flowbite = require("flowbite-react/tailwind");
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  darkMode: ["class"],
-  content: [
-    './pages/**/*.{js,jsx}',
-    './components/**/*.{js,jsx}',
-    './app/**/*.{js,jsx}',
-    './src/**/*.{js,jsx}',
-  ],
-  prefix: "",
+export default {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}",flowbite.content()],
+ 
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
-    colors:{
-      "darkblue":"#183B56",
-      "lightblue":"#1565D8",
-      "white":"#FFFFFF",
-      "deepDarkBlue":"#0D2436",
-      "gray":"#5A7184"
-    },
     extend: {
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
-      },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+      colors: {
+        darkblue: "#183B56",
+        lightblue: "#1565D8",
+        white: "#FFFFFF",
+        deepDarkBlue: "#0D2436",
+        gray: "#5A7184",
+        darkwhite:"#F9FCFF"
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-}
+  plugins: [ flowbite.plugin()],
+};
+
+// module.exports = {
+//   darkMode: ["class"],
+//   content: [
+//     './pages/**/*.{js,jsx}',
+//     './components/**/*.{js,jsx}',
+//     './app/**/*.{js,jsx}',
+//     './src/**/*.{js,jsx}',
+//   ],
+//   prefix: "",
+//   theme: {
+//     container: {
+//       center: true,
+//       padding: "2rem",
+//       screens: {
+//         "2xl": "1400px",
+//       },
+//     },
+//     colors:{
+//       "darkblue":"#183B56",
+//       "lightblue":"#1565D8",
+//       "white":"#FFFFFF",
+//       "deepDarkBlue":"#0D2436",
+//       "gray":"#5A7184"
+//     },
+//     extend: {
+//       keyframes: {
+//         "accordion-down": {
+//           from: { height: "0" },
+//           to: { height: "var(--radix-accordion-content-height)" },
+//         },
+//         "accordion-up": {
+//           from: { height: "var(--radix-accordion-content-height)" },
+//           to: { height: "0" },
+//         },
+//       },
+//       animation: {
+//         "accordion-down": "accordion-down 0.2s ease-out",
+//         "accordion-up": "accordion-up 0.2s ease-out",
+//       },
+//     },
+//   },
+//   plugins: [require("tailwindcss-animate")],
+// }

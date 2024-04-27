@@ -1,5 +1,5 @@
 import MainLayout from "@/Layout/MainLayout";
-import { Breadcrumbs } from "@/components/Breadcrumb";
+
 import Loading from "@/components/Loading/Loading";
 import RecentArticals from "@/components/blog/singleBlog/RecentArticals";
 import { get_Single_blog, get_all_blogs } from "@/services/operations/blogOperation";
@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
 import AllComments from "@/components/blog/comments/AllComments";
+import { Bread } from "@/components/Breadcrumb/Bread";
 function SingleBlog() {
 
 
@@ -29,7 +30,7 @@ function SingleBlog() {
     <MainLayout>
       <div className="bg-[#F9FCFF] sm:w-[700px] lg:w-full mx-auto  ">
         <div className="mb-[29px] hidden md:flex ">
-          <Breadcrumbs />
+          <Bread />
         </div>
         <div className="grid md:mt-0 mt-5 lg:grid-cols-6   ">
           <div className="  lg:col-span-4   rounded-lg ">

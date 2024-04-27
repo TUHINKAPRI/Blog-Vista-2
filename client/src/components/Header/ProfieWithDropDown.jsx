@@ -19,9 +19,9 @@ function ProfieWithDropDown({user}) {
   const [position, setPosition] = React.useState("bottom");
   return (
     <div>
-      <DropdownMenu>
+      <DropdownMenu  className="!bg-[#F9FCFF] " >
         <DropdownMenuTrigger asChild>
-          <Button  className="!ring-0"  >
+          <Button  className="!ring-0 !bg-inherit  "  >
             <Avatar >
               <AvatarImage src={user?.profile_picture} alt="@shadcn" />
               <AvatarFallback>CN</AvatarFallback>

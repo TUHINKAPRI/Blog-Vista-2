@@ -7,6 +7,7 @@ import {
 } from "@/services/operations/blogOperation";
 import Loading from "@/components/Loading/Loading";
 import toast from "react-hot-toast";
+import { Bread } from "@/components/Breadcrumb/Bread";
 
 function EditBlog() {
   const { id } = useParams();
@@ -45,8 +46,25 @@ function EditBlog() {
     fd.append("paid", datas.paid);
     mutate({ id: id, content: fd });
   };
+
+  const breadcrumb=[
+    {
+      name:'Home',
+      path:'/'
+    },{
+      name:'dashboard',
+      path:'/dashboard/user'
+    },{
+      name:'edit blog',
+      
+    }
+  ]
   return (
     <div className="max-w-4xl  mx-auto ">
+    <div>
+        <h1 className="text-[24px] text-darkblue   font-semibold">Edit Blogs</h1>
+        <Bread breadcrumb={breadcrumb} />
+      </div>
       <div>
         <BlogForm
           submitPostHandler={submitPostHandler}

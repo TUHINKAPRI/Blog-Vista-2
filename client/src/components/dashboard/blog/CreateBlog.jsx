@@ -6,6 +6,7 @@ import { logout } from "@/redux/slices/profileSlice";
 import { setBlogs } from "@/redux/slices/blogSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Bread } from "@/components/Breadcrumb/Bread";
 
 function CreateBlog() {
   const dispatch = useDispatch();
@@ -38,9 +39,27 @@ function CreateBlog() {
    fd.append('paid',data.paid);
    mutate(fd)
   };
+
+  const breadcrumb=[
+    {
+      name:'Home',
+      path:'/',
+    
+    },{
+      name:'dashbaord',
+      path:'/dashboard/user'
+    },{
+      name:'create blog'
+    }
+  ]
   return (
     <div className="">
-      <div className="bg-white p-3 ">
+     <div>
+        <h1 className="text-[24px] text-darkblue   font-semibold"> Create Blogs</h1>
+        <Bread breadcrumb={breadcrumb} />
+      </div>
+      <div className="bg-white p-3 h-screen overflow-auto ">
+
         <BlogForm submitPostHandler={submitPostHandler} isLoading={isPending} />
       </div>
     </div>

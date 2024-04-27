@@ -1,68 +1,39 @@
+
+
 import React from "react";
-import moment from "moment";
-import { Button } from "../ui/button";
+import { Avatar, Card } from "flowbite-react";
 import { Link } from "react-router-dom";
+import moment from "moment";
 function BlogCard({ data }) {
   return (
-   
-    <Link to={`/blog/${data?._id}`} className=" w-[310px] sm:w-[310px]  md:w-[360px]  !bg-white shadow-xl  rounded-lg">
-      <div>
-        <img
-          src={data?.thumbnail}
-          alt="Img"
-          className="w-full h-[255px] rounded-t-md "
-        />
-      </div>
-      <div className="w-[296px] mx-auto mt-[24px] mb-8 ">
-        <h1
-          className=" 
- font-bold
- text-[24px]
- tracking-[0.2px]
- leading-[1.286]
- text-[#183B56]"
-        >
-          {data?.title?.slice(0, 50)}
-        </h1>
-        <p className="mt-[12px] text-[#5A7184] text-[14px] ">{data?.description?.slice(0, 70)} ... </p>
-        <div className="mt-[29px] flex justify-between ">
-          <div className="flex gap-3">
-            <img
-              src={data?.author?.profile_picture}
-              alt=""
-              className=" rounded-[999px]
- bg-[50%_50%]
- bg-cover
- bg-no-repeat
- w-[40px]
- h-[40px]"
-            />
-            <div>
-              <p className=" italic font-bold text-[16px] md:text-[18px] text-darkblue">
-                {data?.author?.name}
-              </p>
-              <p className="font-['Open_Sans'] italic font-normal text-[14px] text[#5A7184]">
-                Normal
-              </p>
+    <Link to={`/blog/${data?._id}`}>
+      <Card
+        className="max-w-sm border-none p-2    "
+        imgSrc={data?.thumbnail}
+        horizontal
+      >
+        <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          {data?.title.slice(0, 50)}
+        </h5>
+        <p className="font-normal text-gray-700 dark:text-gray-400">
+          {data?.description.slice(0, 80)}.
+        </p>
+        <div className="flex gap-4 items-center justify-start">
+          <Avatar
+            img={data?.author?.profile_picture}
+            alt="avatar of Jese"
+            rounded
+          />
+          <div className="space-y-1 font-medium dark:text-white">
+            <div>{data?.author?.name}</div>
+            <div className="text-sm text-gray-500 dark:text-gray-400">
+            {moment(data?.createdAt).format("MMMM Do")}
             </div>
           </div>
-          <div>
-            <p className="text-gray font-semibold italic">
-              {moment(data?.createdAt).format("MMMM Do")}
-            </p>
-          </div>
         </div>
-      </div>
-     
+      </Card>
     </Link>
-    
-
   );
 }
 
 export default BlogCard;
-
-
-
-
-

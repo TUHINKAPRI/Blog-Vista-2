@@ -1,11 +1,24 @@
+import { Bread } from "@/components/Breadcrumb/Bread";
 import ProfilePicture from "./ProfilePicture";
 
 function Settings() {
+
+  const breadcrumb=[
+    {
+      name:'Home',
+    path:'/'    },{
+      name:'dashboard',
+      path:'/dashboard/user',
+    },{
+      name:'/settings'
+    }
+  ]
   return (
     <div>
-      <h1 className="mb-14 text-3xl font-medium text-richblack-5">
-        Edit Profile
-      </h1>
+     <div>
+        <h1 className="text-[24px] text-darkblue   font-semibold">Settings</h1>
+        <Bread breadcrumb={breadcrumb} />
+      </div>
       <ProfilePicture />
     </div>
   );

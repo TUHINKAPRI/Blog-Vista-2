@@ -1,20 +1,28 @@
 import { RiEditBoxLine } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Bread } from "../Breadcrumb/Bread";
 function MyProfile() {
+  const breadcrumb=[
+    {
+      name:'Home',
+      path:'/'
+    },
+    {
+      name:'dashboard',
+      path:'/dashboard/user'
+    },{
+      name:"Profile"
+    }
+  ]
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.profile);
   return (
     <div className="pb-5  ">
-      <h1
-        className=" mb-[37px] break-words
- font-['Cairo']
- font-bold
- text-[34px]
- text-[var(--black,#202020)]"
-      >
-        My Profile
-      </h1>
+      <div>
+        <h1 className="text-[24px] text-darkblue   font-semibold">Profile</h1>
+        <Bread breadcrumb={breadcrumb} />
+      </div>
       <div className="flex shadow-[0px_4px_4px_0px_rgba(0,0,0,0.04)] items-center justify-between rounded-md  bg-white px-2 py-8 sm:p-8 sm:px-12">
         <div className="flex items-center gap-x-4">
           <img

@@ -40,7 +40,7 @@ function RecentArticals({ postsData, tagsData }) {
           Tags
         </h2>
         <div className="flex flex-wrap  mb-6 gap-x-2 gap-y-2 mt-4">
-          {tagsData.map((item, index) => (
+          {tagsData?.map((item, index) => (
             <button
              onClick={()=>{}}
               key={index}

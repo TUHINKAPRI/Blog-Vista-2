@@ -6,6 +6,7 @@ import Loading from "../Loading/Loading";
 import { useNavigate } from "react-router-dom";
 import { delete_Post } from "@/services/operations/blogOperation";
 import toast from "react-hot-toast";
+import { Bread } from "../Breadcrumb/Bread";
 
 function MyBlogs() {
   const navigate = useNavigate();
@@ -46,8 +47,25 @@ function MyBlogs() {
     console.log(data);
     mutate(data);
   };
+
+  const breadcrumb=[
+    {
+      name:"Home",
+      path:'/'
+    },{
+      name:'dashboard',
+      path:'/dashboard/user'
+    },{
+      name:'blogs',
+
+    }
+  ]
   return (
     <div>
+     <div>
+        <h1 className="text-[24px] text-darkblue   font-semibold">Blogs</h1>
+        <Bread breadcrumb={breadcrumb} />
+      </div>
       <div className="w-full  h-[200px] flex flex-col gap-4 justify-center items-center ">
         {" "}
         <SearchBox />
