@@ -53,6 +53,11 @@ function NavBar() {
                     Dashboard
                   </Link>
                 </DropdownItem>
+                <DropdownItem>
+                  <Link to="/dashboard/bookmarks" className="font-semibold  ">
+                    Bookmarks
+                  </Link>
+                </DropdownItem>
 
                 <DropdownDivider />
                 <DropdownItem>
@@ -65,7 +70,8 @@ function NavBar() {
                   </button>
                 </DropdownItem>
               </Dropdown>
-              <NavbarToggle />
+              <NavbarToggle ></NavbarToggle>
+          
             </div>
           </>
         ) : (

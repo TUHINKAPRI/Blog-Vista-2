@@ -99,7 +99,14 @@ exports.signin = async (req, res, next) => {
     if (!email || !password) {
       throw new Error("Both fields are required");
     }
-    const ifExist = await User.findOne({ email: email });
+    const ifExist = await User.findOne({ email: email }).populate([
+      {
+        path:'bookmarks',
+        
+      },{
+        path:'membership'
+      }
+    ]);
     if (!ifExist) {
       throw new Error("User does not exist");
     }

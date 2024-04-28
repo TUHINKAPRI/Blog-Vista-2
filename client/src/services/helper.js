@@ -2,8 +2,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 
- export  const BASE_URL = "https://blog-vista-2.onrender.com/api/v1";
-// export  const BASE_URL = "http://localhost:4000/api/v1";
+//  export  const BASE_URL = "https://blog-vista-2.onrender.com/api/v1";
+export  const BASE_URL = "http://localhost:4000/api/v1";
 export const axiosInstance = axios.create({
   baseURL: BASE_URL,
 });

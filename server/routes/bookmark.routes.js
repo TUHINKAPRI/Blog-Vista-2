@@ -2,15 +2,15 @@
 
 const express=require('express');
 const { authGuard } = require('../middleware/auth');
-const { addToBookmarks, removeToBookmarks } = require('../controllers/bookmark.controllers');
+const { addToBookmarks, removeToBookmarks, getUserBookmarks } = require('../controllers/bookmark.controllers');
 
 
 const bookMarkRouter=express.Router();
 
 
-
-bookMarkRouter.put('/add',authGuard,addToBookmarks)
-bookMarkRouter.put('/remove',authGuard,removeToBookmarks)
+bookMarkRouter.get('/',authGuard,getUserBookmarks)
+bookMarkRouter.post('/add',authGuard,addToBookmarks)
+bookMarkRouter.post('/remove',authGuard,removeToBookmarks)
 
 
 

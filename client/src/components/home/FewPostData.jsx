@@ -16,10 +16,9 @@ function FewPostData() {
     return <Loading />;
   }
 
-  console.log(data);
   return (
-    <div className="flex flex-col " > 
-      <div className="flex justify-between gap-[30px] mt-[102px] flex-wrap">
+    <div className="flex flex-col   " > 
+      <div className="flex justify-between items-center gap-[30px] mt-[102px] flex-wrap">
         {data?.data?.slice(0,6).map((ele, index) => (
           <BlogCard data={ele} key={index} />
         ))}

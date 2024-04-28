@@ -12,6 +12,7 @@ const profileSlice = createSlice({
   reducers: {
     setProfileValue: (state, { payload }) => {
       localStorage.setItem("user", JSON.stringify(payload?.data));
+     
       localStorage.setItem("token", JSON.stringify(payload?.token));
       state.user = payload?.data;
     },
@@ -19,6 +20,7 @@ const profileSlice = createSlice({
     logout: (state) => {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+      localStorage.removeItem("bookmarks");
       state.user = null;
     },
     setUserAfterUpdate:(state,{payload})=>{

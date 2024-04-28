@@ -1,6 +1,7 @@
 import AuthLayout from "@/Layout/AuthLayout";
 import SmallLoading from "@/components/Loading/SmallLoading";
 import { Input } from "@/components/ui/input";
+import { setBookmarkData } from "@/redux/slices/bookmarkSlice";
 import { setProfileValue } from "@/redux/slices/profileSlice";
 import { sign_in } from "@/services/operations/authOperation";
 import { useMutation } from "@tanstack/react-query";
@@ -20,6 +21,7 @@ const { register,
     onSuccess:(data)=>{
       toast.success(data?.message)
       dispatch(setProfileValue(data))
+      dispatch(setBookmarkData(data))
       navigate('/')
     },
     onError:(err)=>{

@@ -3,7 +3,7 @@
 function Category({category,categoryHandler}) {
 
   return (
-    <div className="flex"  >
+    <div className="hidden md:flex  "  >
       <h2 className="italic  font-bold text-[#5A7184]  me-4 "  >All Category : </h2>
       <div className="flex flex-wrap gap-3" >
       {category?.data?.map((ele, index) => (

@@ -32,3 +32,12 @@ export const DELETE_COMMENT='/post'
 //payments endpoint
 
 export const PAYMENT_CREATE_ORDER=BASE_URL+'/membership/create-order'
+
+
+
+// bookmark endpoint
+
+
+export const ADD_TO_BOOKMARK=BASE_URL+"/bookmark/add";
+export const REMOVE_FROM_BOOKMARK=BASE_URL+"/bookmark/remove"
+export const GET_USER_BOOKMARKS_DATA=BASE_URL+"/bookmark"

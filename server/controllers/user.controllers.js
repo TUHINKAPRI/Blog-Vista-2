@@ -21,7 +21,9 @@ exports.updateProfilePicture = async (req, res, next) => {
       message: "profile upload successfully",
       data: rest,
     });
-  } catch (err) {}
+  } catch (err) {
+    next(err)
+  }
 };
 
 

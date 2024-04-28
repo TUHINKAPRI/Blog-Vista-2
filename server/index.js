@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/post", postRouter);
 app.use("/api/v1/category", categoryRouter);
-app.use("/api/v1/bookMark", bookMarkRouter);
+app.use("/api/v1/bookmark", bookMarkRouter);
 app.use("/api/v1/user", userRouter);
 app.use('/api/v1/membership',memRouter)
 

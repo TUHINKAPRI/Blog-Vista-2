@@ -20,7 +20,7 @@ function Hero() {
   console.log(data);
 
   return (
-    <div className=" grid grid-cols-1  mt-8  md:grid-cols-2 gap-[31px] ">
+    <div className=" grid grid-cols-1 md:mb-5  mt-8  md:grid-cols-2 gap-[31px] ">
       <div className="col-span-1 w-full sm:w-[535px] md:w-full items-center md:items-start   flex flex-col mx-auto  text-darkblue ">
         <h1 className=" text-[31px] sm:text-[48px] md:text-[50px] font-bold mb-[20px] text-center md:text-start ">
           Read the most interesting articles
@@ -48,7 +48,7 @@ function Hero() {
                   key={index}
                   onClick={() => categoryHandler(ele?._id)}
                 >
-                  <p className="py-[6px] px-[19px] italic font-bold  text-[14px] text-[#1565D8] ">
+                  <p className="py-[6px] px-3 sm:px-[19px] italic font-bold  text-[14px] text-[#1565D8] ">
                     {ele?.name}
                   </p>
                 </button>

@@ -14,10 +14,10 @@ import MyProfile from "./components/dashboard/MyProfile";
 import Settings from "./components/dashboard/settings/Settings";
 import CreateBlog from "./components/dashboard/blog/CreateBlog";
 import EditBlog from "./components/dashboard/blog/EditBlog";
-
 import Membership from "./pages/Membership";
 import MyBlogs from "./components/dashboard/MyBlogs";
 import UserDashboard from "./components/dashboard/UserDashboard";
+import Bookmarks from "./components/dashboard/bookmarks/Bookmarks";
 
 function App() {
   return (
@@ -64,6 +64,7 @@ function App() {
           <Route path='/dashboard/user' element={<UserDashboard/>}/>
             <Route path="/dashboard/my-profile" element={<MyProfile />} />
             <Route path="/dashboard/my-blog" element={<MyBlogs />} />
+            <Route path="/dashboard/bookmarks" element={<Bookmarks />} />
             <Route path="/dashboard/settings" element={<Settings />} />
             <Route path="/dashboard/create-blog" element={<CreateBlog />} />
             <Route path="/dashboard/edit-blog/:id" element={<EditBlog />} />
