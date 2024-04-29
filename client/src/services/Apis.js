@@ -32,6 +32,7 @@ export const DELETE_COMMENT='/post'
 //payments endpoint
 
 export const PAYMENT_CREATE_ORDER=BASE_URL+'/membership/create-order'
+export const VERIFY_PAYMENT=BASE_URL+'/membership/verify-payment'
 
 
 

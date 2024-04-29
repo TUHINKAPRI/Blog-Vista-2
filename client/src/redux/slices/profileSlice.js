@@ -12,26 +12,32 @@ const profileSlice = createSlice({
   reducers: {
     setProfileValue: (state, { payload }) => {
       localStorage.setItem("user", JSON.stringify(payload?.data));
-     
-      localStorage.setItem("token", JSON.stringify(payload?.token));
+
+      localStorage.setItem("accessToken", JSON.stringify(payload?.accessToken));
+      localStorage.setItem(
+        "refreshToken",
+        JSON.stringify(payload?.refreshToken)
+      );
       state.user = payload?.data;
     },
 
     logout: (state) => {
-      localStorage.removeItem("token");
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
       localStorage.removeItem("user");
       localStorage.removeItem("bookmarks");
       state.user = null;
     },
-    setUserAfterUpdate:(state,{payload})=>{
-      localStorage.removeItem('user');
-      console.log(payload);
-      state.user=payload
-      localStorage.setItem('user', JSON.stringify(payload));
-    }
+    setUserAfterUpdate: (state, { payload }) => {
+      localStorage.removeItem("user");
+
+      state.user = payload;
+      localStorage.setItem("user", JSON.stringify(payload));
+    },
   },
 });
 
 export default profileSlice.reducer;
 
-export const { logout, setProfileValue ,setUserAfterUpdate} = profileSlice.actions;
+export const { logout, setProfileValue, setUserAfterUpdate } =
+  profileSlice.actions;

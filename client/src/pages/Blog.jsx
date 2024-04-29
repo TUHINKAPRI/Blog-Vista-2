@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import queryString from "query-string";
 import BlogComponent from "@/components/blog/BlogComponent";
+import { Bread } from "@/components/Breadcrumb/Bread";
 function Blog() {
   const navigate = useNavigate();
   const queryParams = queryString.parse(window.location.search);
@@ -48,9 +49,21 @@ function Blog() {
   // useEffect(() => {
   //   window.scroll(0, 0);
   // }, []);
-
+  const breadcrumb = [
+    {
+      name: "Home",
+      path: "/",
+    },
+    {
+      name: "all blogs",
+    },
+  ];
   return (
     <MainLayout>
+      <div>
+        <h1 className="text-[24px] text-darkblue   font-semibold"> All Blogs</h1>
+        <Bread breadcrumb={breadcrumb} />
+      </div>
       <header className="w-full flex-col gap-8 my-[100px]  flex justify-center items-center ">
         <div>
           <SearchBox
