@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const membershipInfoSchema = new mongoose.Schema(
   {
-    userid: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },

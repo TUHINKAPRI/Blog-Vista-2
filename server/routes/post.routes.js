@@ -1,5 +1,5 @@
 const express = require("express");
-const { authGuard } = require("../middleware/auth");
+const { authGuard, verifyMembership } = require("../middleware/auth");
 const {
   createPost,
   getAllPost,
@@ -20,7 +20,7 @@ const postRouter = express.Router();
 
 postRouter.post("/", authGuard,upload.single('thumbnail'), createPost);
 postRouter.get("/", getAllPost);
-postRouter.get("/:id", singlePost);
+postRouter.get("/:id",verifyMembership, singlePost);
 postRouter.put("/:id", authGuard,upload.single('thumbnail'), updatePost);
 postRouter.delete("/:id", authGuard, deletePost);
 postRouter.post("/like", authGuard, likeAPost);

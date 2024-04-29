@@ -41,6 +41,12 @@ exports.getAllPost = async (req, res, next) => {
 exports.singlePost = async (req, res, next) => {
   try {
     const { id } = req.params;
+    const userId = req?.user?._id;
+
+    let user;
+    if (userId) {
+      user = await User.findById({ _id: userId });
+    }
 
     const post = await Post.findOne({ _id: id }).populate([
       {
@@ -58,36 +64,48 @@ exports.singlePost = async (req, res, next) => {
         },
       },
     ]);
-    // console.log(req.user)
-    //     if(!post?.paid){
-    //     return   res.status(200).json({
-    //         success: true,
-    //         message: "Post fetch successfully",
-    //         data: post,
-    //       });
-    //     }
 
-    //     if(!req?.user?._id){
-    //      return  res.status(200).json({
-    //         success: true,
-    //         message:"Need to login or purchese our memberships"
-    //       })
-    //     }
+    if (!post) {
+      const err = new Error("Post not found");
+      err.status = 404;
+      next(err);
+    }
 
-    //     const findUser=await User.findOne({_id:req.user._id})
-
-    //       if(!findUser?.membership){
-    //         return res.status(200).json({
-    //           success: true,
-    //           message:"Need to purchese our memberships"
-    //         })
-    //       }
-
-    res.status(200).json({
-      success: true,
-      message: "successfully fetch blog details",
-      data: post,
-    });
+    if (!post?.paid) {
+      return res.status(200).json({
+        success: true,
+        message: "successfully fetch blog details",
+        data: post,
+      });
+    }
+    if(post.author._id.toString()===userId){
+      return res.status(200).json({
+        success: true,
+        message: "successfully fetch blog details",
+        data: post,
+      });
+    }
+    if (user) {
+      if (user?.membership) {
+        return res.status(200).json({
+          success: true,
+          message: "successfully fetch",
+          data: post,
+        });
+      } else {
+        return res.status(200).json({
+          success: true,
+          message: "Need To Purchase membership",
+          data:null
+        });
+      }
+    } else {
+      return res.status(200).json({
+        success: true,
+        message: "Need To Login or Purchase membership",
+        data:null
+      });
+    }
   } catch (err) {
     next(err);
   }
