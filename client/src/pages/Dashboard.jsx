@@ -1,5 +1,3 @@
-import AuthLayout from "@/Layout/AuthLayout";
-import MainLayout from "@/Layout/MainLayout";
 import NavBar from "@/components/Header/NavBar";
 import Sidebar from "@/components/dashboard/Sidebar";
 import SmallSidebar from "@/components/dashboard/SmallSidebar";
@@ -7,15 +5,17 @@ import { Outlet } from "react-router-dom";
 
 function Dashboard() {
   return (
-    <div className="">
-      <div className=" mx-4  ">
+    <div className="h-screen bg-white">
+      <div className="bg-[#F9FCFF] px-5">
         <NavBar />
       </div>
-      <div className="flex gap-8 bg-white ">
-        <div className="h-screen mt-3 ms-3  bg-white">
+
+      <div className="flex gap-8  bg-white ">
+        <div className="h-[540px] md:block hidden  mt-3 ms-3  bg-white">
           <Sidebar />
         </div>
-        <div className="mt-3 w-full ">
+
+        <div className=" mx-3  sm:mx-5 md:mx-0   mt-3 h-[540px] overflow-auto w-full ">
           <Outlet />
         </div>
       </div>
@@ -25,22 +25,4 @@ function Dashboard() {
 
 export default Dashboard;
 
-// function Dashboard() {
-//   return (
-//     <div className="flex flex-col  md:gap-3 ">
-//     <NavBar/>
-//       <div className="  hidden  md:w-[340px] md:flex   max-h-screen bg-white   ">
-//         <Sidebar />
-//       </div>
-//       <div className="   flex    md:hidden   max-h-screen bg-white ">
-//         <SmallSidebar />
-//       </div>
 
-//       <div className="w-full overflow-scroll p-2 sm:p-5 h-screen  ">
-//         <Outlet />
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Dashboard;

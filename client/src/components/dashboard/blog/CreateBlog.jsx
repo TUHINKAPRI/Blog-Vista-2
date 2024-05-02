@@ -58,7 +58,7 @@ function CreateBlog() {
         <h1 className="text-[24px] text-darkblue   font-semibold"> Create Blogs</h1>
         <Bread breadcrumb={breadcrumb} />
       </div>
-      <div className="bg-white p-3 h-screen overflow-auto ">
+      <div className="bg-white p-3  ">
 
         <BlogForm submitPostHandler={submitPostHandler} isLoading={isPending} />
       </div>

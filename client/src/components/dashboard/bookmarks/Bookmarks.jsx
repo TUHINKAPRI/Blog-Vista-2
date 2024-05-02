@@ -30,16 +30,16 @@ function Bookmarks() {
   }
   console.log(data?.data);
   return (
-    <div>
+    <div className="overflow-auto">
       <div>
         <h1 className="text-[24px] text-darkblue   font-semibold">Bookmarks</h1>
         <Bread breadcrumb={breadcrumb} />
       </div>
-      <div className="flex flex-wrap gap-4 mt-5" >{
-        data?.data?.posts?.map((ele,index)=>(
+      <div className="flex flex-wrap gap-4 mt-5">
+        {data?.data?.posts?.map((ele, index) => (
           <BlogCard key={index} data={ele} />
-        ))
-      }</div>
+        ))}
+      </div>
     </div>
   );
 }

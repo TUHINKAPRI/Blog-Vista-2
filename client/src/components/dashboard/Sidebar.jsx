@@ -16,8 +16,12 @@ import {
   HiUser,
   HiViewBoards,
 } from "react-icons/hi";
+import { useDispatch } from "react-redux";
+import { logout } from "@/redux/slices/profileSlice";
 
 function Sidebars() {
+  const dispatch=useDispatch()
+  
   const location = useLocation();
   const navigate = useNavigate();
   const manu = [
@@ -90,8 +94,10 @@ function Sidebars() {
             ))}
           </div>
 
-          <Sidebar.Item href="#" icon={HiArrowSmRight}  className="hover:bg-blue-100" >
-            Log-out
+          <Sidebar.Item as='div' icon={HiArrowSmRight}  className="hover:bg-blue-100" >
+            <button onClick={()=>{dispatch(logout())}}  >
+            Log-out 
+            </button>
           </Sidebar.Item>
         </Sidebar.ItemGroup>
       </Sidebar.Items>

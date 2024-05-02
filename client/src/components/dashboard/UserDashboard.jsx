@@ -6,7 +6,6 @@ import { AiFillLike } from "react-icons/ai";
 import Loading from "../Loading/Loading.jsx";
 import { FaComment } from "react-icons/fa";
 import { Button, Table } from "flowbite-react";
-import { Tables } from "../common/Tables.jsx";
 import { BsHandIndex } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 function UserDashboard() {
@@ -39,28 +38,28 @@ function UserDashboard() {
   ];
 
   return (
-    <div>
+    <div className=""  >
       <div>
         <h1 className="text-[24px] text-darkblue   font-semibold">Dashboard</h1>
         <Bread breadcrumb={breadcrumb} />
       </div>
       <div className="mt-6">
-        <div className="flex gap-9">
-          <div className="bg-darkwhite w-[200px] p-4 rounded-md ">
+        <div className="flex gap-9 flex-col sm:flex-row   ">
+          <div className="bg-darkwhite w-[200px] mx-auto sm:mx-0  p-4 rounded-md ">
             <p className="text-xl mb-3 text-darkblue">Total post</p>
             <div className="flex gap-4 items-center">
               <MdPostAdd size={40} className=" text-lightblue" />
               <span className="text-xl">( {data?.data?.length} )</span>
             </div>
           </div>
-          <div className="bg-darkwhite w-[200px] p-4 rounded-md ">
+          <div className="bg-darkwhite w-[200px] mx-auto  sm:mx-0 p-4 rounded-md ">
             <p className="text-xl mb-3 text-darkblue">Total Like</p>
             <div className="flex gap-4 items-center">
               <AiFillLike size={40} className=" text-lightblue" />
               <span className="text-xl">( 33 )</span>
             </div>
           </div>
-          <div className="bg-darkwhite w-[200px] p-4 rounded-md ">
+          <div className="bg-darkwhite w-[200px] mx-auto  sm:mx-0 p-4 rounded-md ">
             <p className="text-xl mb-3 text-darkblue">Total comment</p>
             <div className="flex gap-4 items-center">
               <FaComment size={40} className=" text-lightblue" />
